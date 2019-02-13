@@ -1,7 +1,9 @@
 # Description 
-For binary classification problem, 'trainforest' automatically computes cross validation for features selection, searches for optimal number of variables randomly sampled at each split, generates random forest model with features importance plot, and output metric based on classification or regression problem. 
+For binary classification problem, ```trainforest``` automatically computes cross validation for features selection, searches for optimal number of variables randomly sampled at each split, generates random forest model with features importance plot, and output metric based on classification or regression problem. 
 
-This function utilizes built-in functions from various packages such as 'randomForest', 'caret', 'ggplot2'. User needs to split dataset into train and test set before input data into trainforest.
+This function utilizes built-in functions from various packages such as 'randomForest', 'caret', 'ggplot2' and 'dplyr'. 
+
+User needs to split dataset into train and test set before using ```trainforest```.
 
 # Parameter:
   - response: a train data frame/vector of dependent variable (numeric or factor only)
