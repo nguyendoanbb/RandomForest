@@ -1,18 +1,20 @@
 trainforest <- function(response,features, new.response, new.features,
-                        createPlot = TRUE, fold = 10, cv.step, cv.recursive = F,
+                        createPlot = TRUE, cv.fold, cv.step, cv.recursive = F,
                         tune.improve = 0.01, tune.trace = T){
-  
+  library(randomForest)
+  library(caret)
+  library(dplyr)
   #Implement 10-fold CV for features selection
   
   cv <- rfcv(trainx = features, 
              trainy = response,
-             cv.fold = fold,
+             cv.fold = cv.fold,
              step = cv.step,
              recursive = cv.recursive)
   cv.error <- as.table(cv$error.cv)
   min.feature <- cv.error[cv.error == min(cv.error)]
   min.feature <- as.numeric(attributes(min.feature)$names)
-  bag <- randomForest(x=xx, y=yy, importance = TRUE)
+  bag <- randomForest(x=features, y=response, importance = TRUE)
   var.imp <- varImp(bag)
   
   #classification
@@ -39,8 +41,9 @@ trainforest <- function(response,features, new.response, new.features,
   
   #classification
   if (is.factor(response) == TRUE){
-    metric <- confusionMatrix(pred)
-    cat('The accuracy is: ', metric$accuracy, sep = '')
+    metric <- confusionMatrix(pred, new.response)
+    print(metric$table)
+    cat('The accuracy is: ', as.numeric(metric$overall[1]), sep = '')
   }
   
   #regression
