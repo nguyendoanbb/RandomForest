@@ -1,22 +1,24 @@
-#Description 
-For binary classification problem, 'trainforest' automatically computes cross validation for features selection, searches for optimal number of variables randomly sampled at each split, generates random forest model with features importance plot, and output metric based on classification or regression problem. 
+# Description 
+For binary classification problem, ```trainforest``` automatically computes cross validation for features selection, searches for optimal number of variables randomly sampled at each split, generates random forest model with features importance plot, and output metric based on classification or regression problem. 
 
-This function utilizes built-in functions from various packages such as 'randomForest', 'caret', 'ggplot2'. User needs to split dataset into train and test set before input data into trainforest.
+This function utilizes built-in functions from various packages such as 'randomForest', 'caret', 'ggplot2' and 'dplyr'. 
 
-#Parameter:
-  - response: a train data frame/vector of dependent variable (numeric or factor only)
-  - features: a train data frame/vector of selected features (numeric or factor only)
-  - new.response: a test data frame/vector of dependent variable (numeric or factor only)
-  - new.features: a test data frame/vector of selected features (numeric or factor only)
-  - createPlot: create a plot of features importance
-  - cv.fold: number of k-fold cross validation
-  - cf.step: the fraction of varibles to remove at each step in cross validation
-  - cv.recursive: whether variable iportanceimportance is (re)assessed at each step of variable reduction in cross validation
-  - tune.improve: the improveent in OOB error must be by this much for the search to continue
-  - tune.trace: whether to print the progress of the search in tuning mtry
+User needs to split dataset into train and test set before using ```trainforest```.
+
+# Parameter:
+  - ```response```: a train data frame/vector of dependent variable (numeric or factor only)
+  - ```features```: a train data frame/vector of selected features (numeric or factor only)
+  - ```new.response```: a test data frame/vector of dependent variable (numeric or factor only)
+  - ```new.features```: a test data frame/vector of selected features (numeric or factor only)
+  - ```createPlot```: create a plot of features importance
+  - ```cv.fold```: number of k-fold cross validation
+  - ```cf.step```: the fraction of varibles to remove at each step in cross validation
+  - ```cv.recursive```: whether variable iportanceimportance is (re)assessed at each step of variable reduction in cross validation
+  - ```tune.improve```: the improveent in OOB error must be by this much for the search to continue
+  - ```tune.trace```: whether to print the progress of the search in tuning mtry
   
   
-#Example
+# Example
 
 ```R
 library(faraway)
