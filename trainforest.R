@@ -28,10 +28,10 @@ trainforest <- function(response,features, new.response, new.features,
   }
   #regression
   else{
-  var.imp$Var <- c(row.names(var.imp))
-  var.imp <- var.imp[order(var.imp$Overall, decreasing = TRUE),]
-  row.names(var.imp) <- NULL
-  min.var <- as.vector(var.imp$Var)[1:min.feature] #min numbers of features for lowest error
+    var.imp$Var <- c(row.names(var.imp))
+    var.imp <- var.imp[order(var.imp$Overall, decreasing = TRUE),]
+    row.names(var.imp) <- NULL
+    min.var <- as.vector(var.imp$Var)[1:min.feature] #min numbers of features for lowest error
   }
   #tuning for optimal mtry at each node
   optimal <- tuneRF(x = features[,c(min.var)], y = response, ntreeTry = 500, stepFactor = 5,
@@ -42,14 +42,17 @@ trainforest <- function(response,features, new.response, new.features,
   #classification
   if (is.factor(response) == TRUE){
     metric <- confusionMatrix(pred, new.response)
-    print(metric$table)
-    cat('The accuracy is: ', as.numeric(metric$overall[1]), sep = '')
+    cat('Accuracy is', metric$overall)
+    cat('\n')
+    cat('Minimum number of features needed:', min.var, sep = ' ')
   }
   
   #regression
   else{
     mse <- mean((pred - new.response)^2)
-    cat('The MSE is: ', mse, sep = '')
+    cat('The MSE =', mse, sep = ' ')
+    cat('\n')
+    cat('Minimum number of features needed:', min.var, sep = ' ')
   }
   
   #plotting importance of features
